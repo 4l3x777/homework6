@@ -6,7 +6,7 @@
 */
 #pragma once
 #include <iostream>
-#include <map>
+#include <unordered_map>
 #include <memory>
 #include <list>
 #include <vector>
@@ -54,7 +54,7 @@ class Matrix
         /*!
             \brief Field contain MatrixElement's other layer sisters/brothers.
         */           
-        std::map<size_t, std::shared_ptr<MatrixElement>> _elements_storage;
+        std::unordered_map<size_t, std::shared_ptr<MatrixElement>> _elements_storage;
 
         /*!
             \brief Field contain current non-default MatrixElements.
@@ -176,7 +176,7 @@ class Matrix
     /*!
         \brief Field contain MatrixElement's first layer sisters/brothers.
     */   
-    std::map<size_t, std::shared_ptr<MatrixElement>> _elements_storage;
+    std::unordered_map<size_t, std::shared_ptr<MatrixElement>> _elements_storage;
 
     /*!
         \brief Field contain current non-default MatrixElements.

@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
         std::cout << std::endl;
     }
 
-    // Operator's `=` canonical from
+    // Operator's `=` canonical form
     ((matrix[100][100] = 314) = 0) = 217;
 
     // print one line

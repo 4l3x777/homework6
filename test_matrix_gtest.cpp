@@ -21,7 +21,7 @@ protected:
 
 TEST_F(TestController, test_matrix)
 {	
-	Matrix<int, -1> matrix;
+	Matrix<int, -1, 7> matrix;
 	// N-arn matrix (N = 7)
     matrix[1000][999][998][997][996][995][994] = 7777;
 

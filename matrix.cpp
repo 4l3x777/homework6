@@ -4,18 +4,18 @@
 
 int main(int argc, char* argv[])
 {
-    Matrix<int, -1> matrix;
-    assert(matrix.size() == 0);
-    auto a = matrix[0][0];
+    Matrix<int, -1, 2> matrix1;
+    assert(matrix1.size() == 0);
+    auto a = matrix1[0][0];
     assert(a == -1);
-    assert(matrix.size() == 0);
-    matrix[100][100] = 314;
-    assert(matrix[100][100] == 314);
-    assert(matrix.size() == 1);
+    assert(matrix1.size() == 0);
+    matrix1[100][100] = 314;
+    assert(matrix1[100][100] == 314);
+    assert(matrix1.size() == 1);
 
     // print one line
     // 100100314
-    for(auto c: matrix)
+    for(auto c: matrix1)
     {
         for(auto value: c)
         {
@@ -25,11 +25,11 @@ int main(int argc, char* argv[])
     }
 
     // Operator's `=` canonical form
-    ((matrix[100][100] = 314) = 0) = 217;
+    ((matrix1[100][100] = 314) = 0) = 217;
 
     // print one line
     // 100100217
-    for(auto c: matrix)
+    for(auto c: matrix1)
     {
         for(auto value: c)
         {
@@ -39,15 +39,16 @@ int main(int argc, char* argv[])
     }
 
     // Clear matrix
-    matrix[100][100] = -1;
-    assert(matrix.size() == 0);
+    matrix1[100][100] = -1;
+    assert(matrix1.size() == 0);
 
     // N-arn matrix (N = 7)
-    matrix[1000][999][998][997][996][995][994] = 7777;
+    Matrix<int, -1, 7> matrix2;
+    matrix2[1000][999][998][997][996][995][994] = 7777;
 
     // print one line
     // 1000 999 998 997 996 995 994 7777
-    for(auto c: matrix)
+    for(auto c: matrix2)
     {
         for(auto value: c)
         {
@@ -55,20 +56,20 @@ int main(int argc, char* argv[])
         }
         std::cout << std::endl;
     }
-    
+
     // Create matrix with default value '0'
-    Matrix<int, 0> matrix2;
+    Matrix<int, 0, 2> matrix3;
     for(int i = 0; i < 10; i++)
     {
-        matrix2[i][i] = i;
-        matrix2[i][9 - i] = 9-i;
+        matrix3[i][i] = i;
+        matrix3[i][9 - i] = 9-i;
     }
 
-    // print one line
-    std::cout << matrix2.size() << std::endl;
-    for(auto c: matrix2)
+    // print result
+    std::cout << matrix3.size() << std::endl;
+    for(auto c: matrix3)
     {
-        if (c[0] > 0 && c[1] > 0 && c[0] < 9 && c[1] < 9) 
+        if (c[0] > 0 && c[1] > 0 && c[0] < 9 && c[1] < 9)
         {
             for(auto value: c)
             {

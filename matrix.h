@@ -1,16 +1,32 @@
 #pragma once
 #include <iostream>
-#include <map>
+#include <unordered_map>
 #include <memory>
 #include <vector>
 #include <array>
+#include "murmurhash.h"
+
 
 template <class T, T Value, size_t N>
 class Matrix
 {
-    std::map<std::array<T, N>, T> _elements_storage;
+    class MurmurHasher
+    {
+    public:
+        std::size_t operator()(std::array<T, N> const& indexer) const noexcept
+        {
+            std::string string_literal;
+            for(auto index: indexer)
+            {
+                string_literal += std::to_string(index) + ' ';
+            }  
+            return murmurhash(string_literal.c_str(), (uint32_t)string_literal.size(), (uint32_t)N);
+        }
+    };
 
-    using elements_iterator = typename std::map<std::array<T, N>, T>::iterator;
+    std::unordered_map<std::array<T, N>, T, MurmurHasher> _elements_storage;
+
+    using elements_iterator = typename std::unordered_map<std::array<T, N>, T, MurmurHasher>::iterator;
 
     class Proxy
     {

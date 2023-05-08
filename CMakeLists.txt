@@ -28,9 +28,12 @@ add_executable(
     test_matrix_gtest.cpp
 )
 
+add_library(murmurhash murmurhash.cpp)
+
 set_target_properties(
     matrix
     test_matrix_gtest
+    murmurhash
     PROPERTIES
     CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
@@ -47,14 +50,22 @@ target_link_libraries(
     test_matrix_gtest    
     gtest 
     gtest_main
+    murmurhash
+)
+
+target_link_libraries(
+    matrix
+    murmurhash
 )
 
 if (MSVC)
     target_compile_options(matrix PRIVATE /W4)
     target_compile_options(test_matrix_gtest PRIVATE /W4)
+    target_compile_options(murmurhash PRIVATE /W4)
 else ()
     target_link_options(matrix PRIVATE -static -static-libgcc -static-libstdc++)
     target_link_options(test_matrix_gtest PRIVATE -static -static-libgcc -static-libstdc++)
+    target_link_options(murmurhash PRIVATE -static -static-libgcc -static-libstdc++)
 
     target_compile_options(
         matrix 
@@ -65,6 +76,13 @@ else ()
     )
     target_compile_options(
         test_matrix_gtest 
+        PRIVATE
+        -Wall 
+        -Wextra 
+        -pedantic 
+    )
+    target_compile_options(
+        murmurhash 
         PRIVATE
         -Wall 
         -Wextra 
